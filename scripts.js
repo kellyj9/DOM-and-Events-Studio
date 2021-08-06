@@ -8,11 +8,18 @@ window.onload = (event) => {
     const height = document.getElementById('spaceShuttleHeight');
 
     const landButton = document.getElementById('landing');
-
+    const abortButton = document.getElementById('missionAbort');
+    
     takeoffButton.onclick = takeOffClick;
     landButton.onclick = function(e){
-        landClick(e, bg);
+        landClick(e, bg, height, status);
     };
+
+    abortButton.onclick = function(e){
+        abortClick(e, bg, height);
+    };
+
+
     function takeOffClick(e) {
         const userInput = window.confirm(
             "Confirm that the shuttle is ready for takeoff."
@@ -24,11 +31,23 @@ window.onload = (event) => {
             bg.style.backgroundColor = "blue";
         }
     }
+
+    function abortClick(e) {
+        const userInput = window.confirm(
+            "Confirm that you want to abort the mission."
+        );
+        if (userInput) {
+            status.textContent = "Mission aborted.";
+            height.textContent = "0";
+            bg.style.backgroundColor = "green";
+        }
+    }
+
 }
 
-
-
-function landClick(event, bg) {
-    window.alert("We're landing or w/e");
+function landClick(event, bg, height, status) {
+    window.alert("The shuttle is landing. Landing gear engaged.");
+    status.textContent = "The shuttle is landing. Landing gear engaged.";
     bg.style.backgroundColor = "green";
+    height.textContent = "0";
 }
